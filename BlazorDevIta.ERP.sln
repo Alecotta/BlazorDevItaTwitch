@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorDevIta.ERP.BlazorWasm
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorDevIta.Shared", "BlazorDevIta.Shared\BlazorDevIta.Shared.csproj", "{6F0D2826-2AB8-41FE-A824-CCD2B55C1098}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorDevIta.UI", "BlazorDevIta.UI\BlazorDevIta.UI.csproj", "{6D532F84-074A-4F1F-BE81-0F4622834A0E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorDevIta.UI", "BlazorDevIta.UI\BlazorDevIta.UI.csproj", "{6D532F84-074A-4F1F-BE81-0F4622834A0E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorDevIta.ERP.BlazorServer", "BlazorDevIta.ERP.BlazorServer\BlazorDevIta.ERP.BlazorServer.csproj", "{F24A7138-463C-4441-9C20-8DDCBC0314FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorDevIta.ERP.BlazorServer", "BlazorDevIta.ERP.BlazorServer\BlazorDevIta.ERP.BlazorServer.csproj", "{F24A7138-463C-4441-9C20-8DDCBC0314FC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
