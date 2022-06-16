@@ -5,14 +5,14 @@ namespace BlazorDevIta.ERP.BlazorServer.Services;
 
 public class DataServices : IDataServices
 {
-    public Task<List<WeatherForecast?>?> GetWeatherForecastsAsync()
+    public Task<List<WeatherForecast?>> GetWeatherForecastsAsync()
     {
         var result = Enumerable.Range(1, 5).Select(index => new WeatherForecast
         {
             Date = DateTime.Now.AddDays(index),
             TemperatureC = Random.Shared.Next(-20, 55),
             Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-        }).ToList();
+        }).ToList<WeatherForecast?>();
 
         return Task.FromResult(result);
     }

@@ -9,8 +9,8 @@ namespace BlazorDevIta.ERP.Server.Controllers
     {
         private static readonly string[] Summaries = new[]
         {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
+            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+        };
 
         private readonly ILogger<WeatherForecastController> _logger;
 
@@ -29,6 +29,18 @@ namespace BlazorDevIta.ERP.Server.Controllers
                 Summary = Summaries[Random.Shared.Next(Summaries.Length)]
             })
             .ToList();
+        }
+
+        [HttpPost]
+        public IActionResult Post(WeatherForecast model)
+        {
+            if (ModelState.IsValid)
+            {
+                //Salviamo i dati
+                return Ok(); //Created
+            }
+
+            return BadRequest();
         }
     }
 }

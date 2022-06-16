@@ -1,4 +1,10 @@
-﻿@if (Forecasts != null)
+﻿<h1>Weather forecast</h1>
+
+<button class="btn btn-primary" @onclick="OnCreate">
+    Create Weathert forecast
+</button>
+
+@if (Forecasts?.Count > 0)
 {
     <table class="table">
         <thead>
@@ -35,12 +41,17 @@
 }
 else
 {
-    <span>No Data Available</span>
+    <div>
+        <span>No Data Available</span>
+    </div>
 }
 
 @code {
     [Parameter]
     public List<WeatherForecast?>? Forecasts { get; set; }
+
+    [Parameter]
+    public EventCallback OnCreate { get; set; }
 
     [Parameter]
     public EventCallback<WeatherForecast> OnEdit { get; set; }
