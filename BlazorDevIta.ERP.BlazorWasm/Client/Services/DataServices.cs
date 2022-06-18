@@ -13,6 +13,16 @@ public class DataServices : IDataServices
         _http = http;
     }
 
+    public Task Create(WeatherForecastDetails details)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task Delete(int id)
+    {
+        throw new NotImplementedException();
+    }
+
     public Task<WeatherForecastDetails?> GetWeatherForecastByIdAsync(int id)
     {
         throw new NotImplementedException();
@@ -21,5 +31,10 @@ public class DataServices : IDataServices
     public Task<List<WeatherForecastListItem?>> GetWeatherForecastsAsync()
     {
         return _http.GetFromJsonAsync<List<WeatherForecastListItem?>>("WeatherForecast");
+    }
+
+    public Task Update(WeatherForecastDetails details)
+    {
+        throw new NotImplementedException();
     }
 }

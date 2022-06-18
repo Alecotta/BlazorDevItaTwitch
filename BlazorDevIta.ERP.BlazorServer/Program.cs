@@ -1,5 +1,7 @@
 using BlazorDevIta.ERP.BlazorServer.Data;
 using BlazorDevIta.ERP.BlazorServer.Services;
+using BlazorDevIta.ERP.Infrastructure;
+using BlazorDevIta.ERP.Infrastructure.EF;
 using BlazorDevIta.UI.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +17,12 @@ builder.Services.AddDbContext<ERPDbContext>(opt =>
 {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+builder.Services.AddScoped<DbContext, ERPDbContext>();
+builder.Services.AddScoped(typeof(IRepository<,>), typeof(EFRepository<,>));
+//Per utilizzare un'implementazione speciale:
+//builder.Services.AddScoped(typeof(IRepository<WeatherForecast, int>), typeof(EFWeatherForecastRepository<WeatherForecast, int>));
+
 
 var app = builder.Build();
 

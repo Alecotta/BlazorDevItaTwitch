@@ -13,6 +13,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorDevIta.UI", "BlazorDe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorDevIta.ERP.BlazorServer", "BlazorDevIta.ERP.BlazorServer\BlazorDevIta.ERP.BlazorServer.csproj", "{F24A7138-463C-4441-9C20-8DDCBC0314FC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorDevIta.ERP.Infrastructure", "BlazorDevIta.ERP.Infrastructure\BlazorDevIta.ERP.Infrastructure.csproj", "{6BA7FBCF-67A9-4601-A39A-39CC383C9F2D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorDevIta.ERP.Infrastructure.EF", "BlazorDevIta.ERP.Infrastructure.EF\BlazorDevIta.ERP.Infrastructure.EF.csproj", "{F27C958B-4DD5-4DA6-9E99-64C2FECF14EE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{F24A7138-463C-4441-9C20-8DDCBC0314FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F24A7138-463C-4441-9C20-8DDCBC0314FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F24A7138-463C-4441-9C20-8DDCBC0314FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BA7FBCF-67A9-4601-A39A-39CC383C9F2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BA7FBCF-67A9-4601-A39A-39CC383C9F2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BA7FBCF-67A9-4601-A39A-39CC383C9F2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BA7FBCF-67A9-4601-A39A-39CC383C9F2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F27C958B-4DD5-4DA6-9E99-64C2FECF14EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F27C958B-4DD5-4DA6-9E99-64C2FECF14EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F27C958B-4DD5-4DA6-9E99-64C2FECF14EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F27C958B-4DD5-4DA6-9E99-64C2FECF14EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
