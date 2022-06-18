@@ -13,8 +13,13 @@ public class DataServices : IDataServices
         _http = http;
     }
 
-    public Task<List<WeatherForecast?>> GetWeatherForecastsAsync()
+    public Task<WeatherForecastDetails?> GetWeatherForecastByIdAsync(int id)
     {
-        return _http.GetFromJsonAsync<List<WeatherForecast?>>("WeatherForecast");
+        throw new NotImplementedException();
+    }
+
+    public Task<List<WeatherForecastListItem?>> GetWeatherForecastsAsync()
+    {
+        return _http.GetFromJsonAsync<List<WeatherForecastListItem?>>("WeatherForecast");
     }
 }

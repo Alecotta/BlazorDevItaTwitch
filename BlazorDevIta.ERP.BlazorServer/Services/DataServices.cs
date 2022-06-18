@@ -1,24 +1,42 @@
-﻿using BlazorDevIta.Shared;
+﻿using BlazorDevIta.ERP.BlazorServer.Data;
+using BlazorDevIta.Shared;
 using BlazorDevIta.UI.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace BlazorDevIta.ERP.BlazorServer.Services;
 
 public class DataServices : IDataServices
 {
-    public Task<List<WeatherForecast?>> GetWeatherForecastsAsync()
-    {
-        var result = Enumerable.Range(1, 5).Select(index => new WeatherForecast
-        {
-            Date = DateTime.Now.AddDays(index),
-            TemperatureC = Random.Shared.Next(-20, 55),
-            Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-        }).ToList<WeatherForecast?>();
+    private readonly ERPDbContext _dbContext;
 
-        return Task.FromResult(result);
+    public DataServices(ERPDbContext dbContext)
+    {
+        _dbContext = dbContext;
     }
 
-    private static readonly string[] Summaries = new[]
+    public Task<List<WeatherForecastListItem?>> GetWeatherForecastsAsync()
     {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
+        //Dato il ToListAsync non serve il pattern async/await dato che ritorna un task.
+        return _dbContext.WeatherForecasts.Select(x =>
+            new WeatherForecastListItem()
+            {
+                Id = x.Id,
+                Date = x.Date,
+                TemperatureC = x.TemperatureC
+            }).ToListAsync<WeatherForecastListItem?>();
+    }
+
+    public Task<WeatherForecastDetails?> GetWeatherForecastByIdAsync(int id)
+    {
+        return _dbContext.WeatherForecasts
+            .Where(x => x.Id == id)
+            .Select(x =>
+                new WeatherForecastDetails()
+                {
+                    Id = x.Id,
+                    Date = x.Date,
+                    TemperatureC = x.TemperatureC,
+                    Summary = x.Summary
+                }).SingleOrDefaultAsync();
+    }
 }
