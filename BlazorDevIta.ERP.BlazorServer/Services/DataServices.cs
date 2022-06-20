@@ -1,4 +1,4 @@
-﻿using BlazorDevIta.ERP.BlazorServer.Data;
+﻿using BlazorDevIta.ERP.Business.Data;
 using BlazorDevIta.ERP.Infrastructure;
 using BlazorDevIta.Shared;
 using BlazorDevIta.UI.Services;
@@ -76,7 +76,7 @@ public class DataServices : IDataServices
             Summary = details.Summary
         };
 
-        return _repository.Create(entity);
+        return _repository.CreateAsync(entity);
 
         /*_dbContext.WeatherForecasts.Add(entity);
         await _dbContext.SaveChangesAsync();
@@ -95,7 +95,7 @@ public class DataServices : IDataServices
             Summary = details.Summary
         };
 
-        return _repository.Update(entity);
+        return _repository.UpdateAsync(entity);
 
         /*//Metodo che aggiorna il l'entità andandola prima a cercare.
         _dbContext.WeatherForecasts.Update(entity);
@@ -116,6 +116,6 @@ public class DataServices : IDataServices
         _dbContext.WeatherForecasts.Remove(entity);
         return _dbContext.SaveChangesAsync();*/
 
-        return _repository.Delete(id);
+        return _repository.DeleteAsync(id);
     }
 }

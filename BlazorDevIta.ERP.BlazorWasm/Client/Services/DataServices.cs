@@ -13,28 +13,28 @@ public class DataServices : IDataServices
         _http = http;
     }
 
-    public Task Create(WeatherForecastDetails details)
+    public Task<List<WeatherForecastListItem?>> GetWeatherForecastsAsync()
     {
-        throw new NotImplementedException();
-    }
-
-    public Task Delete(int id)
-    {
-        throw new NotImplementedException();
+        return _http.GetFromJsonAsync<List<WeatherForecastListItem?>>("WeatherForecast")!;
     }
 
     public Task<WeatherForecastDetails?> GetWeatherForecastByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        return _http.GetFromJsonAsync<WeatherForecastDetails>($"WeatherForecast/{id}");
     }
 
-    public Task<List<WeatherForecastListItem?>> GetWeatherForecastsAsync()
+    public Task Create(WeatherForecastDetails details)
     {
-        return _http.GetFromJsonAsync<List<WeatherForecastListItem?>>("WeatherForecast");
+        return _http.PostAsJsonAsync("WeatherForecast", details);
     }
 
     public Task Update(WeatherForecastDetails details)
     {
-        throw new NotImplementedException();
+        return _http.PutAsJsonAsync($"WeatherForecast/{details.Id}", details);
+    }
+
+    public Task Delete(int id)
+    {
+        return _http.DeleteAsync($"WeatherForecast/{id}");
     }
 }

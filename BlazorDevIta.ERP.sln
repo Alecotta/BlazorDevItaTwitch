@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorDevIta.ERP.Infrastruc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorDevIta.ERP.Infrastructure.EF", "BlazorDevIta.ERP.Infrastructure.EF\BlazorDevIta.ERP.Infrastructure.EF.csproj", "{F27C958B-4DD5-4DA6-9E99-64C2FECF14EE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorDevIta.ERP.Business", "BlazorDevIta.ERP.Business\BlazorDevIta.ERP.Business.csproj", "{89EDA1B9-5A3F-4C57-BCE4-E28FCC0A8D88}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{F27C958B-4DD5-4DA6-9E99-64C2FECF14EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F27C958B-4DD5-4DA6-9E99-64C2FECF14EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F27C958B-4DD5-4DA6-9E99-64C2FECF14EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89EDA1B9-5A3F-4C57-BCE4-E28FCC0A8D88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89EDA1B9-5A3F-4C57-BCE4-E28FCC0A8D88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89EDA1B9-5A3F-4C57-BCE4-E28FCC0A8D88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89EDA1B9-5A3F-4C57-BCE4-E28FCC0A8D88}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

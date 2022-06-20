@@ -7,10 +7,10 @@
 
         Task<TEntity?> GetByIdAsync(Tkey id);
 
-        Task Create(TEntity entity);
+        Task CreateAsync(TEntity entity);
 
-        Task Update(TEntity entity);
+        Task UpdateAsync(TEntity entity);
 
-        Task Delete(Tkey id);
+        Task DeleteAsync(Tkey id);
     }
 }

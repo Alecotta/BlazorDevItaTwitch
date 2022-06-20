@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BlazorDevIta.ERP.Business\BlazorDevIta.ERP.Business.csproj" />
     <ProjectReference Include="..\BlazorDevIta.ERP.Infrastructure.EF\BlazorDevIta.ERP.Infrastructure.EF.csproj" />
     <ProjectReference Include="..\BlazorDevIta.ERP.Infrastructure\BlazorDevIta.ERP.Infrastructure.csproj" />
     <ProjectReference Include="..\BlazorDevIta.UI\BlazorDevIta.UI.csproj" />

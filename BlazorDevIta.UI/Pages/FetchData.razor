@@ -11,7 +11,8 @@ else
 {
     @if(currentForecast == null)
     {
-        <Grid Forecasts="forecasts" OnEdit="Edit" OnDelete="Delete" OnCreate="Create" />
+        <!-- Passo il tipo del generico così da aiutare a convertire l'oggetto nella lista (aiuta il compilatore) -->
+        <Grid GridItemType="WeatherForecastListItem" Items="forecasts" OnEdit="Edit" OnDelete="Delete" OnCreate="Create" />
     }
     else
     {

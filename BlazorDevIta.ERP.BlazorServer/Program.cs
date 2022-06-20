@@ -1,5 +1,5 @@
-using BlazorDevIta.ERP.BlazorServer.Data;
 using BlazorDevIta.ERP.BlazorServer.Services;
+using BlazorDevIta.ERP.Business.Data;
 using BlazorDevIta.ERP.Infrastructure;
 using BlazorDevIta.ERP.Infrastructure.EF;
 using BlazorDevIta.UI.Services;
@@ -15,7 +15,10 @@ builder.Services.AddScoped<IDataServices, DataServices>();
 
 builder.Services.AddDbContext<ERPDbContext>(opt =>
 {
-    opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    opt.UseSqlServer(
+            builder.Configuration.GetConnectionString("DefaultConnection"),
+            //Parte utile per indicare dove si trova il contenxt quando si fa una migration
+            b => b.MigrationsAssembly("BlazorDevIta.ERP.BlazorServer"));
 });
 
 builder.Services.AddScoped<DbContext, ERPDbContext>();
