@@ -1,40 +1,61 @@
-﻿using BlazorDevIta.Shared;
+﻿using BlazorDevIta.ERP.Infrastructure.DataTypes;
 using BlazorDevIta.UI.Services;
 using System.Net.Http.Json;
 
 namespace BlazorDevIta.ERP.BlazorWasm.Client.Services;
 
-public class DataServices : IDataServices
+public class DataServices<ListItemType, DetailsType, IdType>
+    : IDataServices<ListItemType, DetailsType, IdType>
+    where DetailsType : BaseDetails<IdType>
 {
     private readonly HttpClient _http;
+    private readonly IConfiguration _configuration;
 
-    public DataServices(HttpClient http)
+    public DataServices(HttpClient http, IConfiguration configuration)
     {
         _http = http;
+        _configuration = configuration;
     }
 
-    public Task<List<WeatherForecastListItem?>> GetWeatherForecastsAsync()
+    public Task<List<ListItemType?>> GetAllAsync()
     {
-        return _http.GetFromJsonAsync<List<WeatherForecastListItem?>>("WeatherForecast")!;
+        //var baseUrl = typeof(ListItemType).Name;
+        var baseUrl = GetBaseUrl<ListItemType>();
+        return _http.GetFromJsonAsync<List<ListItemType?>>(baseUrl)!;
     }
 
-    public Task<WeatherForecastDetails?> GetWeatherForecastByIdAsync(int id)
+    public Task<DetailsType?> GetByIdAsync(IdType id)
     {
-        return _http.GetFromJsonAsync<WeatherForecastDetails>($"WeatherForecast/{id}");
+        var baseUrl = GetBaseUrl<DetailsType>();
+        return _http.GetFromJsonAsync<DetailsType>($"{baseUrl}/{id}");
     }
 
-    public Task Create(WeatherForecastDetails details)
+    public Task CreateAsync(DetailsType details)
     {
-        return _http.PostAsJsonAsync("WeatherForecast", details);
+        var baseUrl = GetBaseUrl<DetailsType>();
+        return _http.PostAsJsonAsync(baseUrl, details);
     }
 
-    public Task Update(WeatherForecastDetails details)
+    public Task UpdateAsync(DetailsType details)
     {
-        return _http.PutAsJsonAsync($"WeatherForecast/{details.Id}", details);
+        var baseUrl = GetBaseUrl<DetailsType>();
+        return _http.PutAsJsonAsync($"{baseUrl}/{details.Id}", details);
     }
 
-    public Task Delete(int id)
+    public Task DeleteAsync(IdType id)
     {
-        return _http.DeleteAsync($"WeatherForecast/{id}");
+        var baseUrl = GetBaseUrl<DetailsType>();
+        return _http.DeleteAsync($"{baseUrl}/{id}");
+    }
+
+    private string GetBaseUrl<T>()
+    {
+        var baseUrl = _configuration[$"ApiUrls:{typeof(T).Name}"];
+        if (baseUrl is null)
+        {
+            throw new Exception($"ApiUrls:{typeof(T).Name} not configured");
+        }
+
+        return baseUrl;
     }
 }

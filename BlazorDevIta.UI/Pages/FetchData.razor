@@ -1,74 +1,28 @@
 ﻿@page "/fetchdata"
-@inject IDataServices DataServices
+@inherits BaseCRUDPage<WeatherForecastListItem, WeatherForecastDetails, int>
 
 <PageTitle>Weather forecast</PageTitle>
 
-@if (forecasts == null)
+@if (items == null)
 {
     <p><em>Loading...</em></p>
 }
 else
 {
-    @if(currentForecast == null)
+    @if(currentItem == null)
     {
         <!-- Passo il tipo del generico così da aiutare a convertire l'oggetto nella lista (aiuta il compilatore) -->
-        <Grid GridItemType="WeatherForecastListItem" Items="forecasts" OnEdit="Edit" OnDelete="Delete" OnCreate="Create" />
+        <Grid GridItemType="WeatherForecastListItem" Items="items" OnEdit="Edit" OnDelete="Delete" OnCreate="Create" />
     }
     else
     {
         <!-- Il context consente di lavorare su un determinato tipo di oggetto. Passando il contesto permetto a Details di lavorare sul contesto -->
-        <Details HeaderPropertyName="Summary" DetailsType="WeatherForecastDetails" Item="currentForecast" OnCancel="Cancel" OnSave="Save">
+        <Details HeaderPropertyName="Summary" DetailsType="WeatherForecastDetails" Item="currentItem" OnCancel="Cancel" OnSave="Save">
             <Fields Context="weather">
                 <TextBox Label="Summary" @bind-Value="weather!.Summary" />
                 <DateBox Label="Date" @bind-Value="weather.Date" />
                 <IntegerBox Label="Temperature C" @bind-Value="weather.TemperatureC" />
             </Fields>
         </Details>
-    }
-}
-
-@code {
-    private List<WeatherForecastListItem?>? forecasts;
-    private WeatherForecastDetails? currentForecast = null;
-
-    protected override async Task OnInitializedAsync()
-        => await RefreshData();
-
-    private async Task RefreshData()
-        => forecasts = await DataServices.GetWeatherForecastsAsync();
-
-    private async Task Edit(WeatherForecastListItem forecast)
-    {
-        currentForecast = await DataServices.GetWeatherForecastByIdAsync(forecast.Id);
-    }
-
-    private async Task Delete(WeatherForecastListItem forecast)
-    {
-        await DataServices.Delete(forecast.Id);
-        await RefreshData();
-    }
-
-    private void Cancel()
-    {
-        currentForecast = null;
-    }
-
-    private async Task Save(WeatherForecastDetails forecast)
-    {
-        if (forecast.Id == 0)
-        {
-            await DataServices.Create(forecast);
-        }
-        else
-        {
-            await DataServices.Update(forecast);
-        }
-        await RefreshData();
-        currentForecast = null;
-    }
-
-    private void Create()
-    {
-        currentForecast = new();
     }
 }
