@@ -13,11 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorDevIta.UI", "BlazorDe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorDevIta.ERP.BlazorServer", "BlazorDevIta.ERP.BlazorServer\BlazorDevIta.ERP.BlazorServer.csproj", "{F24A7138-463C-4441-9C20-8DDCBC0314FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorDevIta.ERP.Infrastructure", "BlazorDevIta.ERP.Infrastructure\BlazorDevIta.ERP.Infrastructure.csproj", "{6BA7FBCF-67A9-4601-A39A-39CC383C9F2D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorDevIta.ERP.Infrastructure", "BlazorDevIta.ERP.Infrastructure\BlazorDevIta.ERP.Infrastructure.csproj", "{6BA7FBCF-67A9-4601-A39A-39CC383C9F2D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorDevIta.ERP.Infrastructure.EF", "BlazorDevIta.ERP.Infrastructure.EF\BlazorDevIta.ERP.Infrastructure.EF.csproj", "{F27C958B-4DD5-4DA6-9E99-64C2FECF14EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorDevIta.ERP.Infrastructure.EF", "BlazorDevIta.ERP.Infrastructure.EF\BlazorDevIta.ERP.Infrastructure.EF.csproj", "{F27C958B-4DD5-4DA6-9E99-64C2FECF14EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorDevIta.ERP.Business", "BlazorDevIta.ERP.Business\BlazorDevIta.ERP.Business.csproj", "{89EDA1B9-5A3F-4C57-BCE4-E28FCC0A8D88}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorDevIta.ERP.Business", "BlazorDevIta.ERP.Business\BlazorDevIta.ERP.Business.csproj", "{89EDA1B9-5A3F-4C57-BCE4-E28FCC0A8D88}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

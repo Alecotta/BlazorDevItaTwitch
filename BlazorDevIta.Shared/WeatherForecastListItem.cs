@@ -14,7 +14,6 @@ namespace BlazorDevIta.Shared
         [Display(Name = "Temp (C)")]
         public int TemperatureC { get; set; }
 
-        [Hidden]
         [Display(Name = "Temp (F)")]
         public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
     }

@@ -16,7 +16,14 @@ else
     }
     else
     {
-        <Details CurrentItem="currentForecast" OnCancel="Cancel" OnSave="Save" />
+        <!-- Il context consente di lavorare su un determinato tipo di oggetto. Passando il contesto permetto a Details di lavorare sul contesto -->
+        <Details HeaderPropertyName="Summary" DetailsType="WeatherForecastDetails" Item="currentForecast" OnCancel="Cancel" OnSave="Save">
+            <Fields Context="weather">
+                <TextBox Label="Summary" @bind-Value="weather!.Summary" />
+                <DateBox Label="Date" @bind-Value="weather.Date" />
+                <IntegerBox Label="Temperature C" @bind-Value="weather.TemperatureC" />
+            </Fields>
+        </Details>
     }
 }
 
