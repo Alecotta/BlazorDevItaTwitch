@@ -1,3 +1,4 @@
+using BlazorDevIta.ERP.BlazorWasm.Server.Configurations;
 using BlazorDevIta.ERP.Business.Data;
 using BlazorDevIta.ERP.Infrastructure;
 using BlazorDevIta.ERP.Infrastructure.EF;
@@ -20,6 +21,9 @@ builder.Services.AddDbContext<ERPDbContext>(opt =>
 
 builder.Services.AddScoped<DbContext, ERPDbContext>();
 builder.Services.AddScoped(typeof(IRepository<,>), typeof(EFRepository<,>));
+
+//AutoMapper DI
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 var app = builder.Build();
 

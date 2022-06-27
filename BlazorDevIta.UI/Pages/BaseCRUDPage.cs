@@ -11,7 +11,7 @@ public class BaseCRUDPage<ListItemType, DetailsType, IdType>
     where ListItemType : BaseListItem<IdType>
     where DetailsType : BaseDetails<IdType>, new()
 {
-    protected List<ListItemType?>? items;
+    protected Page<ListItemType, IdType>? page;
     protected DetailsType? currentItem = null;
 
     //Injection by properties.
@@ -26,11 +26,11 @@ public class BaseCRUDPage<ListItemType, DetailsType, IdType>
             throw new Exception("DataServices not provided");
         }
 
-        await RefreshData();
+        await RefreshData(new PageParameters());
     }
 
-    protected async Task RefreshData()
-        => items = await DataServices!.GetAllAsync();
+    protected async Task RefreshData(PageParameters pageParameters)
+        => page = await DataServices!.GetAllAsync(pageParameters);
 
     protected async Task Edit(ListItemType item)
     {
@@ -50,7 +50,7 @@ public class BaseCRUDPage<ListItemType, DetailsType, IdType>
         }
 
         await DataServices!.DeleteAsync(item.Id);
-        await RefreshData();
+        await RefreshData(new PageParameters());
     }
 
     protected void Cancel()
@@ -70,7 +70,7 @@ public class BaseCRUDPage<ListItemType, DetailsType, IdType>
         {
             await DataServices!.UpdateAsync(item);
         }
-        await RefreshData();
+        await RefreshData(new PageParameters());
         currentItem = null;
     }
 

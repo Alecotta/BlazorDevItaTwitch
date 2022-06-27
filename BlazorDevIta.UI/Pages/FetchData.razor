@@ -3,7 +3,7 @@
 
 <PageTitle>Weather forecast</PageTitle>
 
-@if (items == null)
+@if (page == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -12,7 +12,10 @@ else
     @if(currentItem == null)
     {
         <!-- Passo il tipo del generico così da aiutare a convertire l'oggetto nella lista (aiuta il compilatore) -->
-        <Grid GridItemType="WeatherForecastListItem" Items="items" OnEdit="Edit" OnDelete="Delete" OnCreate="Create" />
+        <Grid IdType="int" 
+            GridItemType="WeatherForecastListItem" 
+            Page="page" OnPageRequest="RefreshData"
+            OnEdit="Edit" OnDelete="Delete" OnCreate="Create" />
     }
     else
     {
