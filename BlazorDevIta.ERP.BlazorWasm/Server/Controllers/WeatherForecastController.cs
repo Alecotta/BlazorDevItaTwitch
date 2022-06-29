@@ -3,6 +3,7 @@ using BlazorDevIta.ERP.Business.Data;
 using BlazorDevIta.ERP.Infrastructure;
 using BlazorDevIta.Shared;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq.Expressions;
 
 namespace BlazorDevIta.ERP.Server.Controllers
 {
@@ -16,6 +17,11 @@ namespace BlazorDevIta.ERP.Server.Controllers
             IRepository<WeatherForecast, int> repository)
             : base(mapper, logger, repository)
         {
+        }
+
+        protected override Expression<Func<WeatherForecast, bool>>? Filter(string filterText)
+        {
+            return x => x.Summary.Contains(filterText);
         }
     }
 }

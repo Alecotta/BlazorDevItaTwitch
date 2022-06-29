@@ -2,8 +2,10 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using BlazorDevIta.ERP.Infrastructure;
 using BlazorDevIta.ERP.Infrastructure.DataTypes;
+using BlazorDevIta.ERP.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace BlazorDevIta.ERP.Server.Controllers
 {
@@ -19,11 +21,18 @@ namespace BlazorDevIta.ERP.Server.Controllers
         protected IRepository<EntityType, IdType> _repository;
         protected readonly IMapper _mapper;
 
+        protected readonly int pageSize = 2;
+
         public CRUDController(IMapper mapper, ILogger<CRUDController<ListItemType, DetailsType, IdType, EntityType>> logger, IRepository<EntityType, IdType> repository)
         {
             _logger = logger;
             _repository = repository;
             _mapper = mapper;
+        }
+
+        protected virtual Expression<Func<EntityType, bool>>? Filter(string filterText)
+        {
+            return null;
         }
 
         [HttpGet]
@@ -32,11 +41,47 @@ namespace BlazorDevIta.ERP.Server.Controllers
         {
             var result = _repository.GetAll();
 
-            var sortedResult = await result
-                .OrderBy(x => x.Id)
-                //Questo metodo si occupa di mappare una lista di un tipo in un altro tipo. Esso lavora sull'IQueryable (non lavora su DB).
-                .ProjectTo<ListItemType>(_mapper.ConfigurationProvider)
-                .ToListAsync();
+            if (!string.IsNullOrEmpty(pageParameters.FilterText))
+            {
+                var predicate = Filter(pageParameters.FilterText);
+                if (predicate != null)
+                {
+                    result = result.Where(predicate);
+                }
+            }
+
+            var itemCount = result.Count();
+            var pageCount = (itemCount + pageSize - 1) / pageSize;
+
+            if (pageParameters.Page > pageCount)
+            {
+                pageParameters.Page = pageCount;
+            }
+            if (pageParameters.Page < 1)
+            {
+                pageParameters.Page = 1;
+            }
+
+
+            if (!string.IsNullOrEmpty(pageParameters.OrderBy))
+            {
+                try
+                {
+                    if (pageParameters.OrderByDirection == OrderDirection.Ascendent)
+                    {
+                        result = result.OrderByProperty(pageParameters.OrderBy);
+                    }
+                    else
+                    {
+                        result = result.OrderByPropertyDescending(pageParameters.OrderBy);
+                    }
+                }
+                catch
+                {
+                    pageParameters.OrderBy = null;
+                    pageParameters.OrderByDirection = OrderDirection.Ascendent;
+                }
+            }
 
             /*.Select(x =>
                 new ListItemType()
@@ -48,9 +93,17 @@ namespace BlazorDevIta.ERP.Server.Controllers
 
             var page = new Page<ListItemType, IdType>()
             {
-                Items = sortedResult,
+                Items = await result
+                    .Skip((pageParameters.Page - 1) * pageSize)
+                    .Take(pageSize)
+                    //Questo metodo si occupa di mappare una lista di un tipo in un altro tipo. Esso lavora sull'IQueryable (non lavora su DB).
+                    .ProjectTo<ListItemType>(_mapper.ConfigurationProvider)
+                    .ToListAsync(),
                 OrderBy = pageParameters.OrderBy,
-                OrderByDirection = pageParameters.OrderByDirection
+                OrderByDirection = pageParameters.OrderByDirection,
+                ItemCount = itemCount,
+                PageCount = pageCount,
+                CurrentPage = pageParameters.Page
             };
 
             return Ok(page);

@@ -23,7 +23,7 @@ public class DataServices<ListItemType, DetailsType, IdType>
         //var baseUrl = typeof(ListItemType).Name;
         var baseUrl = GetBaseUrl<ListItemType>();
         return _http.GetFromJsonAsync<Page<ListItemType, IdType>>
-            ($"{baseUrl}?OrderBy={pageParameters.OrderBy}&OrderDirection={pageParameters.OrderByDirection}")!;
+            ($"{baseUrl}?OrderBy={pageParameters.OrderBy}&OrderByDirection={pageParameters.OrderByDirection}&Page={pageParameters.Page}&FilterText={pageParameters.FilterText}")!;
     }
 
     public Task<DetailsType?> GetByIdAsync(IdType id)
