@@ -1,0 +1,34 @@
+LEZIONE 11
+LICENZA: quando si crea un progetto si deve aggiungere una licenza.
+	     Il file deve avere estensione ".md" (solitamente LICENSE.md).
+
+POLITICA DI BRANCHING: tendenzialmente si ha un branch main che rappresenta il codice che è presente
+                       in produzione (quando si devono per esempio risolvere dei bug presenti in produzione, si deve partire da main).
+					   Da main si stacca un ramo "develop" all'interno del quale vengono messi i cambiamenti prima di portarli in produzione (quando si termina una milestone la si mette in dev).
+					   Ogni Issue o Feature deve avere un ramo dedicato, a partire da dev, il quale avrà una vita breve e verrà mergiato con develop (nome ramo: Issue/numero_issue).
+
+COMANDI:
+	- "git checkout -b develop" --> creazione ramo develop
+	- "git push orgin develop" --> push del nuovo ramo.
+
+
+IMPOSTAZIONI:
+Tra le impostazioni di github, si possono dare delle automazioni ai rami presenti:
+- Default Branch: ramo di default (solitamente main)
+- Branch protection rule: regole di protezione dei rami. Esempi:
+	- Mettere codice su main solo tramite merge (con approvazione).
+	- Richiedere che i checks vengano validati al momento della PR.
+
+
+PROCESSI:
+Ogni volta che viene fatta una PR su dei branch, github mette a disposizione un motore che controlla se il codice builda ancora e supera dei test pre-impostati.
+"GITHUB ACTIONS". Esse vengono eseguite dal motore di github e devono essere presenti in una cartella chiamata ".github".
+Le action si mettono nella sotto cartella "workflows" nel file "build.yml" (yml è un linguaggio dichiarativo che descrive una serie di operazioni che vengono interpretate da un motore di una piattaforma).
+La prima cosa da scrivere è il nome: "name: build".
+Poi si descrive il trigger: ciò che scatena l'evento (workflow_dispatch --> indica che la action può essere lanciata manualmente).
+Le actions eseguono dei job che hanno un nome ed un ambiente di esecuzione.
+Il job eseggue poi una serie di steps:
+	- Fa checkout sul ramo di interesse (fetch-depth: 0 --> prende solo questo)
+	- Installa .net core sulla macchina
+	- Esegue la build del progetto (o della solution)
+	- Esegue i test associati
