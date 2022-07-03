@@ -9,12 +9,12 @@
   <PropertyGroup>
     <PackageLicenseFile>license.md</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <RepositoryUrl>https://github.com/BlazorDevItaTwitch/BlazorDevIta.ERP</RepositoryUrl>
+    <RepositoryUrl>https://github.com/Alecotta/BlazorDevItaTwitch</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
     <None Include="..\README.md" Pack="true" PackagePath="\"/>
-    <None Include="..\license.md" Pack="true" PackagePath="\" />
+    <None Include="..\LICENSE.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <ItemGroup>
