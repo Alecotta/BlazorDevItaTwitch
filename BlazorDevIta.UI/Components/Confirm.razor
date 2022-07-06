@@ -1,0 +1,61 @@
+﻿@inject IConfirmService confirmService
+
+<!-- Modal -->
+<div class="modal fade" id="@ConfirmId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">@Title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        @Message
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @onclick="OnCancel">@CancelLabel</button>
+        <button type="button" class="btn btn-primary" @onclick="OnCofirm">@ConfirmLabel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+@code {
+    //Si tiene tutto in un unico file se non c'è logica e non ci sono metodi.
+
+    [Parameter]
+    public string ConfirmId { get; set; } = Guid.NewGuid().ToString();
+
+    [Parameter]
+    public string Title { get; set; } = "Confirm";
+
+    [Parameter]
+    public string Message { get; set; } = "Are you sure?";
+
+    [Parameter]
+    public string CancelLabel { get; set; } = "Cancel";
+
+    [Parameter]
+    public string ConfirmLabel { get; set; } = "Ok";
+
+    [Parameter]
+    public EventCallback OnCancel { get; set; }
+
+    [Parameter]
+    public EventCallback OnCofirm { get; set; }
+
+    private IJSObjectReference? module = null;
+
+    //Hook che scatta ogni volta che viene eseguito il render sul DOM.
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            //Si sfrutta la JS Isolation. Si carica il modulo del js solo quando necessario (download fisico).
+            //module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/BlazorDevIta.UI/confirm.js");
+            if(confirmService is not null)
+            {
+                await confirmService.Init();   
+            }
+        }
+    }
+}

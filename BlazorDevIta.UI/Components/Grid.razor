@@ -1,6 +1,7 @@
 ﻿<!-- Si definisce un generic -->
 @typeparam GridItemType where GridItemType : BaseListItem<IdType>
 @typeparam IdType
+@inject IConfirmService confirmService
 
 <h1>List Items</h1>
 
@@ -53,7 +54,7 @@
                             Edit
                         </button>
                         <button class="btn btn-danger" 
-                            @onclick="(() => OnDelete.InvokeAsync(item))">
+                            @onclick="(() => RequestDelete(item))">
                             Delete
                         </button>
                     </td>
@@ -88,6 +89,10 @@ else
         <span>No Data Available</span>
     </div>
 }
+
+<Confirm ConfirmId="GridConfirm" OnCofirm="ConfirmDelete" />   
+<!-- <Confirm @ref="confirmDelete" ConfirmId="GridConfirm" OnCofirm="ConfirmDelete" /> -->  
+
 
 @code {
     //Recupero le proprietà del tipo generico.
@@ -136,5 +141,42 @@ else
     {
         pageParameters.Page = page;
         await OnPageRequest.InvokeAsync(pageParameters);
+    }
+
+    private GridItemType? itemToDelete = null;
+    //private Confirm? confirmDelete = null;
+
+    public async Task ConfirmDelete()
+    {
+        if(itemToDelete is not null)
+        {
+            await OnDelete.InvokeAsync(itemToDelete);   
+        }
+
+        //Non si deve utilizzare un riferimento all'istanza di un componente perché si crea accoppiamento.
+        /*if(confirmDelete is not null)
+            {
+            await confirmDelete.HideConfirm();
+        }*/
+
+        if (confirmService is not null)
+        {
+            await confirmService.HideConfirm("GridConfirm");   
+        }
+    }
+
+    public async Task RequestDelete(GridItemType item)
+    {
+        itemToDelete = item;
+
+        /*if(confirmDelete is not null)
+            {
+            await confirmDelete.ShowConfirm();
+        }*/
+        if (confirmService is not null)
+        {
+            await confirmService.ShowConfirm("GridConfirm");   
+        }
+
     }
 }
