@@ -1,9 +1,12 @@
 ﻿@page "/"
+@inject ITextLocalizer localizer
 
 <PageTitle>Index</PageTitle>
 
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
+
+<p>@localizer.Localize("Language")</p>
 
 <SurveyPrompt Title="How is Blazor working for you?" />

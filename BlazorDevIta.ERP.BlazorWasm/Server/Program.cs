@@ -11,12 +11,18 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
+//builder.Services.AddDbContext<ERPDbContext>(opt =>
+//{
+//    opt.UseSqlServer(
+//            builder.Configuration.GetConnectionString("DefaultConnection"),
+//            //Parte utile per indicare dove si trova il contenxt quando si fa una migration
+//            b => b.MigrationsAssembly("BlazorDevIta.ERP.BlazorWasm.Server"));
+//});
+
+//Con EF si può utilizzare l'"In Memory DB" per esempio per effettuare i test.
 builder.Services.AddDbContext<ERPDbContext>(opt =>
 {
-    opt.UseSqlServer(
-            builder.Configuration.GetConnectionString("DefaultConnection"),
-            //Parte utile per indicare dove si trova il contenxt quando si fa una migration
-            b => b.MigrationsAssembly("BlazorDevIta.ERP.BlazorWasm.Server"));
+    opt.UseInMemoryDatabase("BlazorDevItaDB");
 });
 
 builder.Services.AddScoped<DbContext, ERPDbContext>();
