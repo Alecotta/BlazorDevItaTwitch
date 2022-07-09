@@ -25,6 +25,14 @@
     <!-- Va a pescare il js da una libreria esterna -->
     <!-- Grazie alla js isolation, non si dichiara qui -->
     <!-- <script src="_content/BlazorDevIta.UI/confirm.js"></script> -->
+
+    <script>
+        //Script per la gestione della lingua.
+        window.blazorLanguage = {
+            get: () => localStorage['BlazorLanguage'],
+            set: (value) => localStorage['BlazorLanguage'] = value 
+        }
+    </script>
 </body>
 
 </html>

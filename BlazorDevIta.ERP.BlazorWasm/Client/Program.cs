@@ -1,4 +1,6 @@
+using BlazorDevIta.ERP.BlazorWasm.Client.Resources;
 using BlazorDevIta.ERP.BlazorWasm.Client.Services;
+using BlazorDevIta.ERP.Infrastructure.Configuration;
 using BlazorDevIta.UI;
 using BlazorDevIta.UI.Configuration;
 using BlazorDevIta.UI.Services;
@@ -13,7 +15,14 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 
 builder.Services.AddScoped(typeof(IDataServices<,,>), typeof(DataServices<,,>));
 
+//Aggiunta la localizzazione tramite dependency injection.
+builder.Services.AddLocalization();
+builder.Services.AddBlazorDevItaLocalization<Languages>();
+
 //Aggiunto dalla libreria
 builder.Services.AddBlazorDevItaUI();
 
-await builder.Build().RunAsync();
+var app = builder.Build();
+await app.UseDefaultCulture();
+
+await app.RunAsync();
